@@ -1,24 +1,33 @@
-import "./index.css";
-import { APITester } from "./APITester";
+import React from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
+import IncomeList from './features/IncomeList/IncomeList';
+import IncomeForm from './features/IncomeForm/IncomeForm';
 
-import logo from "./logo.svg";
-import reactLogo from "./react.svg";
 
-export function App() {
+const App: React.FC = () => {
   return (
-    <div className="app">
-      <div className="logo-container">
-        <img src={logo} alt="Bun Logo" className="logo bun-logo" />
-        <img src={reactLogo} alt="React Logo" className="logo react-logo" />
-      </div>
+    <div>
+      <nav>
+        <ul>
+          <li>
+            <Link to="/income/new">
+              Add Income
+            </Link>
+          </li>
+          <li>
+            <Link to="/income/list">
+              Income List
+            </Link>
+          </li>
+        </ul>
+      </nav>
 
-      <h1>Bun + React</h1>
-      <p>
-        Edit <code>src/App.tsx</code> and save to test HMR
-      </p>
-      <APITester />
+      <Routes>
+        <Route path="/income/new" element={<IncomeForm />} />
+        <Route path="/income/list" element={<IncomeList />} />
+      </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
