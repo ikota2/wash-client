@@ -1,24 +1,52 @@
-import "./index.css";
-import { APITester } from "./APITester";
+import React from 'react'
+import { Routes, Route, Link } from 'react-router-dom'
+import IncomeList from './features/IncomeList/IncomeList';
+import IncomeForm from './features/IncomeForm/IncomeForm';
+import ProtectedRoute from './features/ProtectedRoute/ProtectedRoute';
+import Login from './features/Login/Login';
 
-import logo from "./logo.svg";
-import reactLogo from "./react.svg";
 
-export function App() {
+const App: React.FC = () => {
+  const handleLogout = () => {
+    localStorage.removeItem('token')
+    localStorage.removeItem('user')
+    window.location.href = '/login'
+  }
+
   return (
-    <div className="app">
-      <div className="logo-container">
-        <img src={logo} alt="Bun Logo" className="logo bun-logo" />
-        <img src={reactLogo} alt="React Logo" className="logo react-logo" />
-      </div>
+    <div>
+      <nav>
+        <ul>
+          <li><Link to="/login">Login</Link></li>
+          <li><Link to="/income/list">Income List</Link></li>
+          <li><Link to="/income/new">Add Income</Link></li>
+          <li><button onClick={handleLogout}>Logout</button></li>
+        </ul>
+      </nav>
 
-      <h1>Bun + React</h1>
-      <p>
-        Edit <code>src/App.tsx</code> and save to test HMR
-      </p>
-      <APITester />
+      <Routes>
+        <Route path="/login" element={<Login />} />
+
+        <Route
+          path="/income/list"
+          element={
+            <ProtectedRoute allowedRoles={['admin', 'user']}>
+              <IncomeList />
+            </ProtectedRoute>
+          }
+        />
+
+        <Route
+          path="/income/new"
+          element={
+            <ProtectedRoute allowedRoles={['admin']}>
+              <IncomeForm />
+            </ProtectedRoute>
+          }
+        />
+      </Routes>
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
