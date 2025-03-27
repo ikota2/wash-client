@@ -16,9 +16,11 @@ const IncomeForm: React.FC = () => {
     cp: '',
     date: ''
   })
+  const token = localStorage.getItem('token')
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target
+
     setFormData(prev => ({
       ...prev,
       [name]: value
@@ -33,6 +35,7 @@ const IncomeForm: React.FC = () => {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
+          'Authorization': `Bearer ${token}`,
         },
         body: JSON.stringify(formData)
       })

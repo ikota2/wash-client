@@ -13,11 +13,16 @@ const IncomeList: React.FC = () => {
   const [incomeEntries, setIncomeEntries] = useState<IncomeEntry[]>([])
   const [isLoading, setIsLoading] = useState(true)
   const [error, setError] = useState<string | null>(null)
+  const token = localStorage.getItem('token')
 
   useEffect(() => {
     const fetchIncomeEntries = async () => {
       try {
-        const response = await fetch('http://localhost:3000/api/income/getAll')
+        const response = await fetch('http://localhost:3000/api/income/getAll', {
+          headers: {
+            'Authorization': `Bearer ${token}`
+          }
+        })
 
         if (!response.ok) {
           throw new Error('Failed to fetch income entries')
