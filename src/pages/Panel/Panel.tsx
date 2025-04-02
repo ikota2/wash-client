@@ -1,24 +1,24 @@
 import React from 'react';
-import Tabs from '../../shared/ui/Tabs/Tabs';
 import { Navigate, Route, Routes } from 'react-router-dom';
-
+import Tabs from '../../shared/ui/Tabs/Tabs';
 import IncomePanel from '../../features/IncomePanel/IncomePanel';
 import OutcomePanel from '../../features/OutcomePanel/OutcomePanel';
 
-const senderTabs = [
-	{ name: 'Income', path: '' },
-	{ name: 'Outcome', path: 'outcome' },
+const panelTabs = [
+	{ name: 'IncomePanel', path: '' },
+	{ name: 'OutcomePanel', path: 'outcome' },
 ];
 
-const Sender = () => {
-	const basePath = '/sender';
+const Panel = () => {
+	const basePath = '/panel';
 	return (
-		<div className="sender">
-			<Tabs tabs={senderTabs} basePath={basePath} />
-			<div className="sender__content">
+		<div className="panel">
+			<h1>Panel</h1>
+			<Tabs tabs={panelTabs} basePath={basePath} />
+			<div className="panel__content">
 				<Routes>
 					<Route path="/" element={<IncomePanel />} />
-					<Route path="/outcome-panel" element={<OutcomePanel />} />
+					<Route path="/outcome" element={<OutcomePanel />} />
 					<Route path="*" element={<Navigate to="/" replace />} />
 				</Routes>
 			</div>
@@ -26,4 +26,4 @@ const Sender = () => {
 	);
 };
 
-export default Sender;
+export default Panel;
