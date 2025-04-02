@@ -1,0 +1,29 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.name {
+	display: flex;
+}
+
+.tab {
+	padding: 10px 20px;
+	cursor: pointer;
+	border: none;
+	background-color: lightgray;
+	transition: 0.25s ease-in-out;
+}
+
+.activeTab {
+	padding: 10px 20px;
+	cursor: pointer;
+	background-color: darkgray;
+	border: 3px solid wheat;
+}
+
+.content {
+	padding: 20px;
+	border: 1px solid lightgray;
+	margin-top: 10px;
+}
